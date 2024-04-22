@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Delete, HttpCode, UseInterceptors } from '@nestjs/common'
+import { Controller, Get, Post, Body, Delete, HttpCode } from '@nestjs/common'
 import { SWAGGER_TAGS } from '@swagger/utils'
 import { SwaggerPrivateRoute } from '@swagger/utils'
 import { SwaggerBaskets } from '@swagger/baskets'
 
-import { TransactionInterceptor } from '@interceptors/transaction.interceptor'
 import { RequestUser } from '@decorators/user.decorator'
+import { WithTransaction } from '@decorators/transaction.decorator'
 import { BadRequest, NotFound } from '@exceptions/index'
 import { ERROR_MESSAGES, SUCCESS_RESPONSE } from '@utils/messages'
 import { AddProductDto, RemoveProductDto, CheckoutBasketDto } from '@dto/basket.dto'
@@ -33,7 +33,7 @@ export class BasketsController {
 
   @SwaggerBaskets.addProduct()
   @Post('products')
-  @UseInterceptors(TransactionInterceptor)
+  @WithTransaction()
   async addProduct(@RequestUser('id') currentUserId: number, @Body() addProductDto: AddProductDto) {
     const product = await this.productsService.getById(addProductDto.productId)
 
@@ -50,7 +50,7 @@ export class BasketsController {
 
   @SwaggerBaskets.removeProduct()
   @Delete('products')
-  @UseInterceptors(TransactionInterceptor)
+  @WithTransaction()
   async removeProduct(@RequestUser('id') currentUserId: number, @Body() removeProductDto: RemoveProductDto) {
     const product = await this.productsService.getById(removeProductDto.productId)
 
@@ -82,7 +82,7 @@ export class BasketsController {
   @SwaggerBaskets.checkout()
   @Post('checkout')
   @HttpCode(200)
-  @UseInterceptors(TransactionInterceptor)
+  @WithTransaction()
   async checkout(@RequestUser('id') currentUserId: number, @Body() checkoutBasketDto: CheckoutBasketDto) {
     const basket = await this.basketsService.getByUserId(currentUserId)
 

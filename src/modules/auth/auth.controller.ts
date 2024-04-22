@@ -1,14 +1,14 @@
-import { Body, Controller, HttpCode, Post, UseInterceptors } from '@nestjs/common'
+import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { SWAGGER_TAGS, SwaggerTag } from '@swagger/utils'
 import { SwaggerAuth } from '@swagger/auth'
 
 import { Public } from '@decorators/public.decorator'
+import { WithTransaction } from '@decorators/transaction.decorator'
 import { BadRequest } from '@exceptions/index'
 import { ERROR_MESSAGES } from '@utils/messages'
 import { LoginUserDto, RegisterUserDto } from '@dto/user.dto'
 import { AuthService } from './auth.service'
 import { UsersService } from '@modules/users/users.service'
-import { TransactionInterceptor } from '@interceptors/transaction.interceptor'
 
 @SwaggerTag(SWAGGER_TAGS.Auth)
 @Public()
@@ -19,7 +19,7 @@ export class AuthController {
   @SwaggerAuth.register()
   @Post('register')
   @HttpCode(200)
-  @UseInterceptors(TransactionInterceptor)
+  @WithTransaction()
   async register(@Body() registerUserDto: RegisterUserDto) {
     const user = await this.usersService.getByEmail(registerUserDto.email)
 
