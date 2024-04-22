@@ -1,0 +1,43 @@
+version: '3.1'
+
+networks:
+  e_commerce_application:
+    driver: bridge
+
+services:
+  app:
+    depends_on:
+      - postgres
+    container_name: e_commerce_application
+    restart: unless-stopped
+    command: bash -c "npm run start:dev"
+    env_file: ./.env
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - '4000:4000'
+
+    environment:
+      DB_HOST: postgres
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_PORT: $DB_PORT
+    stdin_open: true
+    tty: true
+    networks:
+      - e_commerce_application
+
+  postgres:
+    container_name: e_commerce_application_postgres
+    image: postgres
+    ports:
+      - '5442:$DB_PORT'
+    env_file: ./.env
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    networks:
+      - e_commerce_application
