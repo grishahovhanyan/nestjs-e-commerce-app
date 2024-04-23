@@ -26,7 +26,7 @@ export class RegisterUserDto {
 
   @ApiProperty({ example: 'password' })
   @IsString()
-  @Match('password', { message: 'must be like password' })
+  @Match('password', { message: VALIDATION_MESSAGES.passwordMismatch })
   confirmPassword: string
 }
 
