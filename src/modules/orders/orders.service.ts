@@ -3,7 +3,7 @@ import { Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Injectable } from '@nestjs/common'
 
-import { Order, OrderProduct, DB_RELATIONS, IFindAndCountInput } from '@app/database'
+import { Order, OrderProduct } from '@app/database'
 import { CreateOrderDto, GetOrdersDto } from './dto/order.dto'
 import { OrdersRepository } from './orders.repository'
 import { OrderProductsService } from '@modules/order-products/order-products.service'
