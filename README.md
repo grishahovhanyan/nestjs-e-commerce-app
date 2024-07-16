@@ -124,6 +124,14 @@ docker compose up
 
 ![swagger-orders](public/img/swagger-orders.png)
 
+## Useful commands
+
+- `npm run build` compile typescript to js
+- `npm run lint` run the linter to check for code quality issues
+- `npm run migrations:generate` generate migrations based on entities
+- `npm run migrations:rollback` rollback the last migration
+- `npm run start:prod` start the application in production mode
+
 ## Author
 
 - **Grisha Hovhanyan** - [github:grishahovhanyan](https://github.com/grishahovhanyan)
