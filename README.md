@@ -114,7 +114,7 @@ docker compose up
 - **Add product to basket:** `POST /baskets/products/`
 - **Remove product from basket:** `DELETE /baskets/products/`
 - **Empty basket:** `DELETE /baskets/`
-- **Checkout basket:** `POST /baskets/`
+- **Checkout basket:** `POST /baskets/checkout/`
 
 ![swagger-baskets](public/img/swagger-baskets.png)
 
