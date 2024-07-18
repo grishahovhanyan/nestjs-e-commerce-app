@@ -1,12 +1,3 @@
-// TODO: create role admin,user
-// * USER can create basket and add to it products, see his orders
-// * ADMIN can create products, watch all baskets, watch all orders
-
-// TODO: update readme (architecture, e-commerce)
-
-// TODO: add payment (stripe)
-// TODO: add email notification (resource from udemy)
-
 import 'dotenv/config'
 import { initializeTransactionalContext } from 'typeorm-transactional'
 import { SwaggerModule } from '@nestjs/swagger'
