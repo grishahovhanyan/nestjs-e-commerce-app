@@ -1,4 +1,4 @@
-# NestJS Social Application Backend
+# NestJS E-Commerce Application Backend
 
 ## Prerequisites:
 
